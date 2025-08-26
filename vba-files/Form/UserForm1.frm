@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserForm1 
-   Caption         =   "Cadastro de Usuï¿½rio"
+   Caption         =   "Cadastro de Usuário"
    ClientHeight    =   7695
    ClientLeft      =   120
    ClientTop       =   465
@@ -21,7 +21,7 @@ Dim cnt As Control
 For Each cnt In Me.Controls
     If TypeOf cnt Is MSForms.TextBox Then
         If cnt.Value = "" Then
-            MsgBox "O campo " & cnt.Name & " estï¿½ vazio. Por favor preencha corretamente!", vbCritical
+            MsgBox "O campo " & cnt.Name & " está vazio. Por favor preencha corretamente!", vbCritical
             cnt.SetFocus
             Exit Sub
         End If
@@ -39,7 +39,10 @@ End Sub
 Sub CadastraNovoUser()
 
 Call ConexaoBd
+         
+Sql = "SELECT COUNT(*) FROM Usuarios WHERE Login = '" & Me.LoginTx.Text & "'"
 
+'------------------------------------------'
 Sql = "SELECT * FROM Usuarios"
 
 Rs.Open Sql, cnn, adOpenKeyset, adLockOptimistic
@@ -51,6 +54,7 @@ Rs.AddNew
     Rs!Sobrenome = Me.SobrenomeTx.Value
     Rs!Email = Me.EmailTx.Value
     Rs!Senha = Me.SenhaTx.Value
+    Rs!UserMaster = Me.UserMasterSimOp.Value
     Rs!DtCadastro = Now
     Rs!Status = "Habilitado"
     
@@ -62,7 +66,7 @@ cnn.Close
 Set Rs = Nothing
 Set cnn = Nothing
 
-MsgBox "Operaï¿½ï¿½o realizada com sucesso", vbInformation, "Cadastrado"
+MsgBox "Operação realizada com sucesso", vbInformation, "Cadastrado"
 
 End Sub
 

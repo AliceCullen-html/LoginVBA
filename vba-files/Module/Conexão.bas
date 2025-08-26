@@ -1,4 +1,4 @@
-Attribute VB_Name = "Conexï¿½o"
+Attribute VB_Name = "Conexão"
 Option Explicit
 
 Public cnn As New ADODB.Connection
